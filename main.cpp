@@ -3,8 +3,6 @@
 #include <ctime>
 #include <string>
 
-const std::string NEGRITO = "\033[1m";
-const std::string RESET   = "\033[0m";
 
 using namespace std;
 
@@ -19,7 +17,13 @@ int playerY = 1;
 
 
 int main() {
+
+    const string NEGRITO = "\033[1m";
+    const string RESET   = "\033[0m";
+    const string AZUL     = "\033[94m"; 
+    
  int inventario [5] = {0, 0, 0, 0, 0};
+ 
     int metagravetos = 0;
    int metapedras = 0; 
    int metafrutas = 0; 
@@ -42,7 +46,7 @@ int main() {
         #endif
 
         cout << "=========================================" << endl;
-        cout << "       BEM-VINDO AO MINE" << NEGRITO <<" C++ 2  " << RESET << endl;
+        cout << "       BEM-VINDO AO "<< NEGRITO << "MINE C++ 2  " << RESET << endl;
         cout << "=========================================" << endl;
         cout << "  1. Iniciar Novo Jogo" << endl;
         cout << "  2. Sair do Programa" << endl;
@@ -152,7 +156,7 @@ int main() {
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 12; j++) {
                 if (i == playerX && j == playerY) {
-                    cout << 'P' << ' '; 
+                    cout << ' ' << AZUL << 'P' << RESET <<' '; 
                 } else {
                     cout << ' ' << mapa[i][j] << ' '; 
                 }
