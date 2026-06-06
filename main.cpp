@@ -1,6 +1,10 @@
 #include <iostream>
 #include <cstdlib> 
 #include <ctime>
+#include <string>
+
+const std::string NEGRITO = "\033[1m";
+const std::string RESET   = "\033[0m";
 
 using namespace std;
 
@@ -28,6 +32,35 @@ int main() {
   int  objetivoescolhido = 0;
 
     char tecla;
+
+    int opcaoMenu = 0;
+    while (opcaoMenu != 1) {
+        #ifdef _WIN32
+            system("cls");
+        #else
+            system("clear");
+        #endif
+
+        cout << "=========================================" << endl;
+        cout << "       BEM-VINDO AO MINE" << NEGRITO <<" C++ 2  " << RESET << endl;
+        cout << "=========================================" << endl;
+        cout << "  1. Iniciar Novo Jogo" << endl;
+        cout << "  2. Sair do Programa" << endl;
+        cout << "=========================================" << endl;
+        cout << "Escolha uma opcao: ";
+        cin >> opcaoMenu;
+
+        if (opcaoMenu == 2) {
+            cout << "Fechando o jogo. Ate logo!" << endl;
+            return 0; 
+        }
+        if (opcaoMenu != 1) {
+            cout << "Opcao invalida! Pressione ENTER para tentar novamente.";
+            cin.ignore();
+            cin.get();
+        }
+    }
+    
     
  cout << "Seja muito bem vindo(a), aventureiro(a)! Escolha um objetivo para sua jornada: " << endl;
  cout << "   1 . Luz e calor: voce deve coletar 4 gravetos e 2 rochas." << endl;
