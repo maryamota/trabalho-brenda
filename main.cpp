@@ -1,18 +1,18 @@
 #include <iostream>
 #include <cstdlib> 
+#include <ctime>
 
 using namespace std;
 
 
 
-int mapa[12][12];
+char mapa[12][12];
 
 
 int playerX = 1; 
 int playerY = 1;
 
-int itemX;
-int itemY;
+
 
 int main() {
  int inventario [5] = {0, 0, 0, 0, 0};
@@ -22,18 +22,18 @@ int main() {
    int metaanimais = 0; 
    int metaarvores = 0;
 
- bool jogorodando = true;
- const char* nomesItens[5] = {"Gravetos", "Pedras", "Frutas", "Animais", "Arvores"};
+ const char* nomesItens[5] = {"Gravetos", "Rocha", "Frutas", "Animais", "Arvores"};
+ char iconesItens[5] = {'g', 'r', 'f', 'n', 'a'};
  
   int  objetivoescolhido = 0;
 
     char tecla;
     
  cout << "Seja muito bem vindo(a), aventureiro(a)! Escolha um objetivo para sua jornada: " << endl;
- cout << "   1 . Luz e calor: voce deve coletar 4 gravetos e 2 pedras." << endl;
+ cout << "   1 . Luz e calor: voce deve coletar 4 gravetos e 2 rochas." << endl;
  cout << "   2 . Comida: voce deve coletar 1 fruta e 3 animais." << endl;
- cout << "   3 . Abrigo: voce deve coletar 5 gravetos e 4 pedras." << endl;
- cout << "   4 . Construcao: voce deve coletar 8 pedras e 4 arvores;" << endl;
+ cout << "   3 . Abrigo: voce deve coletar 5 gravetos e 4 rochas." << endl;
+ cout << "   4 . Construcao: voce deve coletar 8 rochas e 4 arvores;" << endl;
  cin >> objetivoescolhido;
 
  if (objetivoescolhido == 1) {
@@ -62,9 +62,27 @@ int main() {
  
     srand(time(0));
 
-    itemX = rand() % 12;
-    itemY = rand() % 12;
-    
+   
+    for (int i = 0; i < 12; i++) {
+        for (int j = 0; j < 12; j++) {
+            int chance = rand() % 100; 
+
+            if (chance < 15) {          
+                mapa[i][j] = 'g'; 
+            } else if (chance < 30) {   
+                mapa[i][j] = 'r'; 
+            } else if (chance < 40) {   
+                mapa[i][j] = 'f'; 
+            } else if (chance < 50) {   
+                mapa[i][j] = 'n'; 
+            } else if (chance < 65) {  
+                mapa[i][j] = 'a'; 
+            } else {                    
+                mapa[i][j] = '.'; 
+            }
+        }
+    }
+
     
     while (true) {
         
@@ -74,23 +92,50 @@ int main() {
             system("clear");
         #endif
         
+        cout << "===========================================" << endl;
+        cout << "          INVENTARIO DO JOGADOR            " << endl;
+        cout << "===========================================" << endl;
+        for (int i = 0; i < 5; i++) {
+            cout << "->" << nomesItens[i] << ": " << inventario[i] << endl;
+        }
+        cout << "===========================================" << endl;
+        
+        
+        char itemAtual = mapa[playerX][playerY];
+
+     
+        if (itemAtual != '.') {
+            if (itemAtual == 'g') inventario[0]++;    
+            else if (itemAtual == 'r') inventario[1]++; 
+            else if (itemAtual == 'f') inventario[2]++; 
+            else if (itemAtual == 'r') inventario[3]++; 
+            else if (itemAtual == 'a') inventario[4]++; 
+
+           
+            mapa[playerX][playerY] = '.';
+        }
+
         
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 12; j++) {
                 if (i == playerX && j == playerY) {
-                    mapa[i][j] = 'P';
-
+                    cout << 'P' << ' '; 
                 } else {
-                    mapa[i][j] =  '.'; 
+                    cout << ' ' << mapa[i][j] << ' '; 
                 }
             }
             cout << endl;
         }
+
+
+
         
         
         cout << "\nUse W, A, S, D + ENTER para andar. Pressione 'Q' + ENTER para sair.\n";
         cout << "Comando: ";
         
+        
+       
         
         cin >> tecla; 
         
@@ -98,22 +143,19 @@ int main() {
         if ((tecla == 'w' || tecla == 'W') && playerX > 0) {
             playerX--; 
         }
-        if ((tecla == 's' || tecla == 'S') && playerX < LINHAS - 1) {
+        if ((tecla == 's' || tecla == 'S') && playerX < 11) {
             playerX++; 
         }
         if ((tecla == 'a' || tecla == 'A') && playerY > 0) {
             playerY--; 
         }
-        if ((tecla == 'd' || tecla == 'D') && playerY < COLUNAS - 1) {
+        if ((tecla == 'd' || tecla == 'D') && playerY < 11) {
             playerY++; 
         }
+
         if (tecla == 'q' || tecla == 'Q') {
             break; 
 
-            if (playerX == itemX && playerY == itemY) {
-            // pega o item la                      
-            }
-            
         }
     }
     
