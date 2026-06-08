@@ -145,8 +145,8 @@ int main() {
             if (itemAtual == 'g') inventario[0]++;    
             else if (itemAtual == 'r') inventario[1]++; 
             else if (itemAtual == 'f') inventario[2]++; 
-            else if (itemAtual == 'r') inventario[3]++; 
-            else if (itemAtual == 'a') inventario[4]++; 
+            else if (itemAtual == 'a') inventario[3]++; 
+            else if (itemAtual == 'n') inventario[4]++; 
 
            
             mapa[playerX][playerY] = '.';
