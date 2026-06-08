@@ -21,6 +21,10 @@ int main() {
     const string NEGRITO = "\033[1m";
     const string RESET   = "\033[0m";
     const string AZUL     = "\033[94m"; 
+    const string VERMELHO = "\033[91m";
+
+    int vidaMax = 5;
+    int vidaAtual = 5;
     
  int inventario [5] = {0, 0, 0, 0, 0};
  
@@ -55,7 +59,7 @@ int main() {
         cin >> opcaoMenu;
 
         if (opcaoMenu == 2) {
-            cout << "Fechando o jogo. Ate logo!" << endl;
+            cout << "Fechando o jogo." << endl;
             return 0; 
         }
         if (opcaoMenu != 1) {
@@ -99,6 +103,15 @@ int main() {
  
     srand(time(0));
 
+    for (int i = 0; i < 12; i++) {
+        for (int j = 0; j < 12; j++) {
+    
+            if (i == 1 && j == 1) {
+                mapa[i][j] = '.';
+                
+             }
+       }
+   }
    
     for (int i = 0; i < 12; i++) {
         for (int j = 0; j < 12; j++) {
@@ -114,6 +127,10 @@ int main() {
                 mapa[i][j] = 'n'; 
             } else if (chance < 65) {  
                 mapa[i][j] = 'a'; 
+            } else if (chance < 70) {   
+                mapa[i][j] = '#'; 
+            } else if (chance < 77) {
+                mapa[i][j] = 'X';
             } else {                    
                 mapa[i][j] = '.'; 
             }
@@ -128,6 +145,13 @@ int main() {
         #else
             system("clear");
         #endif
+
+         cout << "===========================================" << endl;
+        cout << " STATUS DO JOGADOR                         " << endl;
+        cout << "===========================================" << endl;
+        cout << " VIDA: " << VERMELHO;
+        for(int v = 0; v < vidaAtual; v++) cout << "<3 "; 
+        cout << RESET << " (" << vidaAtual << "/" << vidaMax << ")" << endl;
         
         cout << "===========================================" << endl;
         cout << "          INVENTARIO DO JOGADOR            " << endl;
@@ -145,11 +169,24 @@ int main() {
             if (itemAtual == 'g') inventario[0]++;    
             else if (itemAtual == 'r') inventario[1]++; 
             else if (itemAtual == 'f') inventario[2]++; 
-            else if (itemAtual == 'a') inventario[3]++; 
-            else if (itemAtual == 'n') inventario[4]++; 
+            else if (itemAtual == 'a') inventario[4]++; 
+            else if (itemAtual == 'n') inventario[3]++; 
+
+            else if (itemAtual == 'X') {
+                vidaAtual--;
+                cout << VERMELHO << "\nVOCE PISOU EM ESPINHOS E PERDEU 1 DE VIDA!" << RESET << endl;
+
+            }
 
            
             mapa[playerX][playerY] = '.';
+        }
+
+        if (vidaAtual <= 0) {
+            cout << "\n===========================================" << endl;
+            cout << VERMELHO << "          GAME OVER! VOCE MORREU.          " << RESET << endl;
+            cout << "===========================================" << endl;
+            break;
         }
 
         
@@ -177,17 +214,17 @@ int main() {
         cin >> tecla; 
         
         
-        if ((tecla == 'w' || tecla == 'W') && playerX > 0) {
-            playerX--; 
+       if ((tecla == 'w' || tecla == 'W') && playerX > 0) {
+            if (mapa[playerX - 1][playerY] != '#') playerX--; 
         }
         if ((tecla == 's' || tecla == 'S') && playerX < 11) {
-            playerX++; 
+            if (mapa[playerX + 1][playerY] != '#') playerX++; 
         }
         if ((tecla == 'a' || tecla == 'A') && playerY > 0) {
-            playerY--; 
+            if (mapa[playerX][playerY - 1] != '#') playerY--; 
         }
         if ((tecla == 'd' || tecla == 'D') && playerY < 11) {
-            playerY++; 
+            if (mapa[playerX][playerY + 1] != '#') playerY++; 
         }
 
         if (tecla == 'q' || tecla == 'Q') {
