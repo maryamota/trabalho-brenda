@@ -7,7 +7,7 @@ using namespace std;
 
 
 
-char mapa[16][12];
+char mapa[16][16];
 
 
 int playerX = 1; 
@@ -34,7 +34,7 @@ int main() {
    int metaarvores = 0;
 
  const char* nomesItens[5] = {"Gravetos", "Rocha", "Frutas", "Animais", "Arvores"};
- char iconesItens[5] = {'g', 'r', 'f', 'n', 'a'};
+ 
  
   int  objetivoescolhido = 0;
   string nomeObjetivo = ""; 
@@ -68,46 +68,56 @@ int main() {
         }
     }
     
-    
- cout << "Seja muito bem vindo(a), aventureiro(a)! Escolha um objetivo para sua jornada: " << endl;
- cout << "   1 . Luz e calor: voce deve coletar 4 gravetos e 2 rochas." << endl;
- cout << "   2 . Comida: voce deve coletar 1 fruta e 3 animais." << endl;
- cout << "   3 . Abrigo: voce deve coletar 5 gravetos e 4 rochas." << endl;
- cout << "   4 . Construcao: voce deve coletar 8 rochas e 4 arvores;" << endl;
- cin >> objetivoescolhido;
+     objetivoescolhido = 0;
 
-if (objetivoescolhido == 1) {
-  cout <<"Voce escolheu o objetivo: Luz e calor." << endl;
-   nomeObjetivo = "Luz e calor";
-   metagravetos = 4;
-   metapedras = 2;
+while (true) {
+    cout << "Seja muito bem vindo(a), aventureiro(a)! Escolha um objetivo para sua jornada: " << endl;
+    cout << "   1 . Luz e calor: voce deve coletar 4 gravetos e 2 rochas." << endl;
+    cout << "   2 . Comida: voce deve coletar 1 fruta e 3 animais." << endl;
+    cout << "   3 . Construcao: voce deve coletar 8 rochas e 4 arvores;" << endl;
+    cout << "Escolha uma opcao: ";
+    cin >> objetivoescolhido;
 
- } else if (objetivoescolhido == 2) {
-   metafrutas = 1;
-   metaanimais = 3;
-   nomeObjetivo = "Comida";
-   cout <<"Voce escolheu o objetivo: Comida." << endl;
-
- } else if (objetivoescolhido == 3) {
-   metagravetos = 5; 
-   metapedras = 4;
-   nomeObjetivo = "Abrigo";
-   cout <<"Voce escolheu o objetivo: Abrigo." << endl;
-
- } else if (objetivoescolhido == 4) {
-   metapedras = 8; 
-   metaarvores = 4;
-   nomeObjetivo = "Construcao";
-   cout <<"Voce escolheu o objetivo: Construcao." << endl;
-
- } else {
-   cout << "Opção inválida. Por favor, escolha um objetivo válido." << endl;
- }
+    if (objetivoescolhido == 1) {
+        cout << "Voce escolheu o objetivo: Luz e calor." << endl;
+        nomeObjetivo = "Luz e calor";
+        metagravetos = 4;
+        metapedras = 2;
+        break;
+    } 
+    else if (objetivoescolhido == 2) {
+        metafrutas = 1;
+        metaanimais = 3;
+        nomeObjetivo = "Comida";
+        cout << "Voce escolheu o objetivo: Comida." << endl;
+        break;
+    } 
+    else if (objetivoescolhido == 3) {
+        metapedras = 8; 
+        metaarvores = 4;
+        nomeObjetivo = "Construcao";
+        cout << "Voce escolheu o objetivo: Construcao." << endl;
+        break;
+    } 
+    else {
+        cout << "\n========================================================" << endl;
+        cout << "Opcao invalida! Pressione ENTER para tentar novamente." << endl;
+        cout << "========================================================\n" << endl;
+        cin.ignore();
+        cin.get();
+        
+        #ifdef _WIN32
+            system("cls");
+        #else
+            system("clear");
+        #endif
+    }
+}
  
     srand(time(0));
 
     for (int i = 0; i < 16; i++) {
-        for (int j = 0; j < 12; j++) {
+        for (int j = 0; j < 16; j++) {
     
             if (i == 1 && j == 1) {
                 mapa[i][j] = '.';
@@ -264,13 +274,13 @@ if (objetivoescolhido == 1) {
        if ((tecla == 'w' || tecla == 'W') && playerX > 0) {
             if (mapa[playerX - 1][playerY] != '#') playerX--; 
         }
-        if ((tecla == 's' || tecla == 'S') && playerX < 11) {
+        if ((tecla == 's' || tecla == 'S') && playerX < 15) {
             if (mapa[playerX + 1][playerY] != '#') playerX++; 
         }
         if ((tecla == 'a' || tecla == 'A') && playerY > 0) {
             if (mapa[playerX][playerY - 1] != '#') playerY--; 
         }
-        if ((tecla == 'd' || tecla == 'D') && playerY < 11) {
+        if ((tecla == 'd' || tecla == 'D') && playerY < 15) {
             if (mapa[playerX][playerY + 1] != '#') playerY++; 
         }
 
