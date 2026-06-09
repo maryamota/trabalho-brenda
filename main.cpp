@@ -164,11 +164,38 @@ if (objetivoescolhido == 1) {
             cout << "->" << nomesItens[i] << ": " << inventario[i] << endl;
         }
         cout << "===========================================" << endl;
-        
+
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 12; j++) {
+                if (i == playerX && j == playerY) {
+                    cout << ' ' << AZUL << 'P' << RESET <<' '; 
+                } else {
+                    cout << ' ' << mapa[i][j] << ' '; 
+                }
+            }
+            cout << endl;
+        }
+
         
         char itemAtual = mapa[playerX][playerY];
 
-     
+     if (itemAtual != '.' && itemAtual != 'X') {
+            string nomeDoItem = "";
+            if (itemAtual == 'g') nomeDoItem = "Gravetos";
+            else if (itemAtual == 'r') nomeDoItem = "Rocha";
+            else if (itemAtual == 'f') nomeDoItem = "Frutas";
+            else if (itemAtual == 'n') nomeDoItem = "Animais";
+            else if (itemAtual == 'a') nomeDoItem = "Arvores";
+
+            cout << "\nVoce encontrou: " << nomeDoItem << "!" << endl;
+            cout << "Deseja coletar? (S para Sim / N para Nao): ";
+            char escolhaColeta;
+            cin >> escolhaColeta;
+            if (escolhaColeta == 'n' || escolhaColeta == 'N') {
+                itemAtual = '.'; 
+                mapa[playerX][playerY] = '.'; 
+            }
+        }
         if (itemAtual != '.') {
             if (itemAtual == 'g') inventario[0]++;    
             else if (itemAtual == 'r') inventario[1]++; 
@@ -204,8 +231,8 @@ if (objetivoescolhido == 1) {
             cout << " Jogo concluido! Fechando automaticamente em 3 segundos..." << endl;
             cout << "=======================================================" << endl;
             
-            Sleep(3000); // Força o Windows a congelar por 3 segundos antes do retorno
-            return 0;    // Encerra o programa de fato
+            Sleep(3000); 
+            return 0;    
         }
 
             
@@ -220,17 +247,7 @@ if (objetivoescolhido == 1) {
         }
 
         
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 12; j++) {
-                if (i == playerX && j == playerY) {
-                    cout << ' ' << AZUL << 'P' << RESET <<' '; 
-                } else {
-                    cout << ' ' << mapa[i][j] << ' '; 
-                }
-            }
-            cout << endl;
-        }
-
+        
 
 
         
