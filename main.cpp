@@ -7,7 +7,7 @@ using namespace std;
 
 
 
-char mapa[12][12];
+char mapa[16][12];
 
 
 int playerX = 1; 
@@ -48,12 +48,12 @@ int main() {
             system("clear");
         #endif
 
-        cout << "=========================================" << endl;
-        cout << "       BEM-VINDO AO "<< NEGRITO << "MINE C++ 2  " << RESET << endl;
-        cout << "=========================================" << endl;
+        cout << "========================================================" << endl;
+        cout << "                BEM-VINDO AO "<< NEGRITO << "MINE C++ 2  " << RESET << endl;
+        cout << "========================================================" << endl;
         cout << "  1. Iniciar Novo Jogo" << endl;
         cout << "  2. Sair do Programa" << endl;
-        cout << "=========================================" << endl;
+        cout << "========================================================" << endl;
         cout << "Escolha uma opcao: ";
         cin >> opcaoMenu;
 
@@ -106,7 +106,7 @@ if (objetivoescolhido == 1) {
  
     srand(time(0));
 
-    for (int i = 0; i < 12; i++) {
+    for (int i = 0; i < 16; i++) {
         for (int j = 0; j < 12; j++) {
     
             if (i == 1 && j == 1) {
@@ -116,8 +116,8 @@ if (objetivoescolhido == 1) {
        }
    }
    
-    for (int i = 0; i < 12; i++) {
-        for (int j = 0; j < 12; j++) {
+    for (int i = 0; i < 16; i++) {
+        for (int j = 0; j < 16; j++) {
             int chance = rand() % 100; 
 
             if (chance < 15) {          
@@ -150,23 +150,23 @@ if (objetivoescolhido == 1) {
             system("clear");
         #endif
 
-         cout << "===========================================" << endl;
-        cout << " STATUS DO JOGADOR                         " << endl;
-        cout << "===========================================" << endl;
+         cout << "================================================" << endl;
+        cout << "             STATUS DO JOGADOR                         " << endl;
+        cout << "=================================================" << endl;
         cout << " VIDA: " << VERMELHO;
         for(int v = 0; v < vidaAtual; v++) cout << "<3 "; 
         cout << RESET << " (" << vidaAtual << "/" << vidaMax << ")" << endl;
         
-        cout << "===========================================" << endl;
+        cout << "================================================" << endl;
         cout << "          INVENTARIO DO JOGADOR            " << endl;
-        cout << "===========================================" << endl;
+        cout << "================================================" << endl;
         for (int i = 0; i < 5; i++) {
             cout << "->" << nomesItens[i] << ": " << inventario[i] << endl;
         }
-        cout << "===========================================" << endl;
+        cout << "================================================" << endl;
 
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 12; j++) {
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 16; j++) {
                 if (i == playerX && j == playerY) {
                     cout << ' ' << AZUL << 'P' << RESET <<' '; 
                 } else {
@@ -240,9 +240,9 @@ if (objetivoescolhido == 1) {
         
 
         if (vidaAtual <= 0) {
-            cout << "\n===========================================" << endl;
+            cout << "\n=======================================================" << endl;
             cout << VERMELHO << "          GAME OVER! VOCE MORREU.          " << RESET << endl;
-            cout << "===========================================" << endl;
+            cout << "=========================================================" << endl;
             break;
         }
 
