@@ -201,7 +201,7 @@ while (true) {
 
             if (escolhaColeta == 'n' || escolhaColeta == 'N') {
                 itemAtual = '.'; 
-            }
+            } 
 
             mapa[playerX][playerY] = '.'; 
         }
